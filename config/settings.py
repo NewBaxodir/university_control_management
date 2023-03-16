@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'moderator',
     'teacher',
     'study_plan',
+
+
+
+    'fontawesomefree',
 ]
 
 AUTH_USER_MODEL = 'moderator.MainUser'
