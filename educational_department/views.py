@@ -12,11 +12,15 @@ from cafedra.models import Cafedra, CafedraManager
 from study_plan.models import Science, Direction
 
 
-def home_page_view(request: WSGIRequest):
-    return render(request, _('home'), {
-        'id': 0,
-        'page_name': ''' O'quv bo'limi bosh safifasi ''',
-    })
+def home(request):
+    return render(request, 'educational_department/home.html')
+
+
+# def home(request: WSGIRequest):
+#     return render(request, _('home'), {
+#         'id': 0,
+#         'page_name': ''' O'quv bo'limi bosh safifasi ''',
+#     })
 
 
 

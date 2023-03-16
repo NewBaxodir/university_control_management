@@ -1,9 +1,25 @@
-from django.urls import path
-from . import views 
+"""config URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+
+from django.urls import path, include
+from educational_department import views 
 
 
 urlpatterns = [
-    path('', views.home_page_view, name='home'),
+    path('', views.home, name='home'),
     path('auth/logout', views.logout_view, name='logout'),
     path('faculty/', views.all_faculty_view, name='list_faculty'),
     path('cafedra/', views.all_cafedra_view, name='list_cafedra'),
