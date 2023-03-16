@@ -1,0 +1,110 @@
+{% extends 'educational_department/base.html' %}
+
+{% block navbar %}
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="javascript:void(0)" style="pointer-events: none;"> 
+                Yo'nalishlar
+            </a>
+        </li>
+    </ul>
+{% endblock navbar %}
+
+
+{% block body %}
+<div class="card">
+    <h5 class="card-header"> 
+        Yo'nalishlar ro'yxati 
+    </h5>
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead class="table-light">
+          <tr>
+            <th> Nomi </th>
+            <th style="text-transform: none;">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Fakulteti
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for i in facultys %}
+                    <li><a class="dropdown-item" href="?faculty_id={{ i.pk }}"> {{ i.name }} </a></li>
+                    {% endfor %}
+                </ul> 
+            </th>
+            <th style="text-transform: none;"> 
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Tili
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="?language=uzbek">O'zbek</a></li>
+                    <li><a class="dropdown-item" href="?language=rus">Rus</a></li>
+                    <li><a class="dropdown-item" href="?language=other">Boshqa</a></li>
+                </ul>    
+            </th>
+            <th style="text-transform: none;"> 
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Shakli
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="?shape=kunduzgi">Kunduzgi</a></li>
+                    <li><a class="dropdown-item" href="?shape=kechki">Kechki</a></li>
+                    <li><a class="dropdown-item" href="?shape=sirtqi">Sirtqi</a></li>
+                </ul>
+            </th>
+            <th> Kodi </th>
+            <th style="text-transform: none;"> 
+                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Yili
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      {% for i in list_years %}
+                      <li><a class="dropdown-item" href="?year={{i}}">{{i}}</a></li>
+                      {% endfor %}
+                    </ul>
+             </th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          {% for i in data %}
+            <tr>
+                <td>
+                    <strong> 
+                        <a href="#" class="btn btn-sm btn-outline-primary"> 
+                            {{ i.name }} 
+                        </a>        
+                    </strong>
+                </td>
+                <td>
+                    <strong> 
+                        <a href="#" class="btn btn-sm btn-outline-primary"> 
+                            {{ i.faculty.name }} 
+                        </a>        
+                    </strong>
+                </td>
+                <td> 
+                    {% if i.language == 'uzbek' %} O'zbek
+                    {% elif i.language == 'rus' %} Rus
+                    {% else %} Boshqa
+                    {% endif %}
+                </td>
+                <td> {{ i.study_form }} </td>
+                <td> {{ i.code }} </td>
+                <td> {{ i.year }} </td>
+                <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Yangilash</a>
+                       </div>
+                    </div>
+                  </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

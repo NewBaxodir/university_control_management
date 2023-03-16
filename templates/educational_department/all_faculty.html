@@ -1,0 +1,43 @@
+{% extends 'educational_department/base.html' %}
+
+{% block navbar %}
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="javascript:void(0)" style="pointer-events: none;"> 
+                Fakultetlar 
+            </a>
+        </li>
+    </ul>
+{% endblock navbar %}
+
+
+{% block body %}
+<div class="card">
+    <h5 class="card-header"> Fakultetlar ro'yxati </h5>
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead class="table-light">
+          <tr>
+            <th>Fakultet nomi</th>
+            <th>Dekaning ism-familyasi</th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          {% for i in data %}
+            <tr>
+                <td>
+                    <i class="fab fa-angular fa-lg text-danger me-3"></i> 
+                    <strong> 
+                        <a href="#" class="btn btn-sm btn-outline-primary"> 
+                            {{ i.name }} 
+                        </a>        
+                    </strong>
+                </td>
+                <td> {{ i.manager.user.last_name }} {{ i.manager.user.first_name }} </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
