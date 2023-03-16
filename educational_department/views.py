@@ -83,10 +83,6 @@ def all_direction_view(request: WSGIRequest):
     })
 
 
-# rgygryergyrgt
-
-
-# rerututrygu
 
 
 
@@ -96,6 +92,11 @@ def all_direction_view(request: WSGIRequest):
 
 
 
+'''
+
+
+jdiehehurfehfurehfurhgurhgfu
+'''
 
 
 
