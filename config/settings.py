@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
 
     # Asosiy applar
+    'login',
     'educational_department',
     'cafedra',
     'fakultet',
