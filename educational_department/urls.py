@@ -19,7 +19,7 @@ from educational_department import views
 
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.home_uquv_management, name='home'),
     path('auth/logout', views.logout_view, name='logout'),
     path('faculty/', views.all_faculty_view, name='list_faculty'),
     path('cafedra/', views.all_cafedra_view, name='list_cafedra'),

@@ -18,7 +18,8 @@ from study_plan.models import (
 )
 
 
-admin.site.unregister(Group)
+# admin.site.register(Group)
+# admin.site.register(Group, GroupAdmin)
 
 
 

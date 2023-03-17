@@ -12,7 +12,7 @@ from cafedra.models import Cafedra, CafedraManager
 from study_plan.models import Science, Direction
 
 
-def home(request):
+def home_uquv_management(request):
     return render(request, 'educational_department/home.html')
 
 
