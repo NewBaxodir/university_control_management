@@ -12,6 +12,14 @@ from cafedra.models import Cafedra, CafedraManager
 from study_plan.models import Science, Direction
 
 
+from django.contrib.auth import login, logout,authenticate
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from login.decorators import unauthenticated_user , allowed_users, admin_only
+
+
+@login_required(login_url='login')
+@admin_only
 def home_uquv_management(request):
     return render(request, 'educational_department/home.html')
 
