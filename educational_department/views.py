@@ -18,10 +18,10 @@ from django.contrib.auth.decorators import login_required
 from login.decorators import unauthenticated_user , allowed_users, admin_only
 
 
-@login_required(login_url='login')
+@login_required(login_url='auth:login')
 @admin_only
 def home_uquv_management(request):
-    return render(request, 'educational_department/home.html')
+    return render(request, _('home'), {})
 
 
 # def home(request: WSGIRequest):
@@ -187,15 +187,4 @@ def all_direction_view(request: WSGIRequest):
 
 
 
-
-
-
-
-
-
-
-
-
-def logout_view(request):
-    logout(request)
-    return redirect('home')
+# 
