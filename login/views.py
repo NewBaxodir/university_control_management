@@ -16,7 +16,7 @@ def login(request: WSGIRequest):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login_func(request, user)
-            return redirect('home_uquv_management')
+            return redirect('educational_department:home')
         else:
             messages.info(request, 'Login or password error')
     context = {}
