@@ -28,7 +28,7 @@
         <form method="POST"> {% csrf_token %}
           <div class="input-group mb-3">
             {{login_form.errors}}
-            <input type="email" name="username" class="form-control" placeholder="Login">
+            <input type="text" name="username" class="form-control" placeholder="Login">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
