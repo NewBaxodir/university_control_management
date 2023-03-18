@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout,authenticate
 from django.contrib.auth import authenticate, login as dj_login
 from django.shortcuts import redirect, render
 from educational_department import views
+from django.contrib import messages
 # Create your views here.
 
 
