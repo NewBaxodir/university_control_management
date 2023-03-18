@@ -1,13 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
-    {% load static %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in (v2)</title>
+  <title> Login </title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{% static 'admin_lte/plugins/fontawesome-free/css/all.min.css' %}">
   <!-- icheck bootstrap -->
@@ -15,78 +17,68 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'admin_lte/dist/css/adminlte.min.css' %}">
 </head>
+
 <body class="hold-transition login-page">
-<div class="login-box">
-  <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Admin</b></a>
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-body">
+        <p class="login-box-msg">Maxsus login parolingiz bilan kabinetingizga kiring</p>
+
+        <form method="POST"> {% csrf_token %}
+          <div class="input-group mb-3">
+            {{login_form.errors}}
+            <input type="email" name="username" class="form-control" placeholder="Login">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Meni eslab qol
+                </label>
+              </div>
+            </div>
+            
+            {% for message in messages %}
+              <p align="left" style="color: red;">{{ message }}</p>
+            {% endfor %}
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Kirish</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+        <p class="mb-1">
+          <a href="#">Men parolimni unutdim</a>
+        </p>
+      </div>
+      <!-- /.card-body -->
     </div>
-    <div class="card-body">
-      <p class="login-box-msg">Maxsus login parolingiz bilan kabinetingizga kiring</p>
-
-      
-
-
-      <form method="POST" action="">{% csrf_token %}
-        <div class="input-group mb-3">
-         {{login_form.errors}}
-          <input type="text" class="form-control" name="username" placeholder="Login">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Meni eslab qol
-              </label>
-            </div>
-          </div>
-          
-           {% for message in messages %}
-        <p align="left" style="color: red;">{{message}}</p>
-        {% endfor %}
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Kirish</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-
-
-
-      <!-- /.social-auth-links -->
-
-      <p class="mb-1">
-        <a href="#">Men parolimni unutdim</a>
-      </p>
-  
-    </div>
-    <!-- /.card-body -->
+    <!-- /.card -->
   </div>
-  <!-- /.card -->
-</div>
-<!-- /.login-box -->
+  <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="  {% load static %}plugins/jquery/jquery.min.js  {% load static %}"></script>
-<!-- Bootstrap 4 -->
-<script src="  {% load static %}plugins/bootstrap/js/bootstrap.bundle.min.js  {% load static %}"></script>
-<!-- AdminLTE App -->
-<script src="{% load static %}dist/js/adminlte.min.js  {% load static %}"></script>
+  <!-- jQuery -->
+  <script src="{% static 'admin_lte/plugins/jquery/jquery.min.js' %}"></script>
+  <!-- Bootstrap 4 -->
+  <script src="{% static 'admin_lte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- AdminLTE App -->
+  <script src="{% static 'admin_lte/dist/js/adminlte.min.js' %}"></script>
 </body>
+
 </html>
