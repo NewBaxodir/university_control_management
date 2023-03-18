@@ -18,8 +18,8 @@ from django.contrib.auth.decorators import login_required
 from login.decorators import unauthenticated_user , allowed_users, admin_only
 
 
-@login_required(login_url='login')
-@admin_only
+# @login_required(login_url='login')
+# @admin_only
 def home_uquv_management(request):
     return render(request, 'educational_department/home.html')
 
@@ -50,7 +50,6 @@ def all_cafedra_view(request: WSGIRequest):
         'page_name': ''' Kafedralar ro'yxati ''',
         'data': cafedras,
     })
-
 
 
 def all_direction_view(request: WSGIRequest):
