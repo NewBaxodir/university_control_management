@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
 from django.contrib.auth import login, logout, authenticate
 from django.db.models import Q
-
+from django.core.handlers.wsgi import WSGIRequest
 
 from educational_department.models import *
 from .utils import get_educational_department_manager_or_404, custom_404, custom_template_name as _
@@ -23,12 +23,22 @@ from login.decorators import unauthenticated_user , allowed_users, admin_only
 def home_uquv_management(request):
     return render(request, _('home'), {})
 
+@login_required(login_url='auth:login')
+def add_hr_views(request: WSGIRequest):
 
-# def home(request: WSGIRequest):
-#     return render(request, _('home'), {
-#         'id': 0,
-#         'page_name': ''' O'quv bo'limi bosh safifasi ''',
-#     })
+    return render(request, _('add_hr'), {})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
