@@ -47,9 +47,6 @@ INSTALLED_APPS = [
     'moderator',
     'teacher',
     'study_plan',
-
-
-
     'fontawesomefree',
 ]
 
@@ -136,8 +133,13 @@ STATIC_URL = 'static/'
 # STATIC_ROOT = BASE_DIR / 'static'
 
 STATICFILES_DIRS = [
+<<<<<<< HEAD
     BASE_DIR / "static",
     # '/var/www/static/',
+=======
+    BASE_DIR / "static"
+    #'/var/www/static/',
+>>>>>>> 6d545aa912ebd253e16af723bef66e5f3ac1ab48
 ]
 
 # Default primary key field type
