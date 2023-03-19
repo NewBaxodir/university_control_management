@@ -18,8 +18,13 @@ from django.contrib.auth.decorators import login_required
 from login.decorators import unauthenticated_user , allowed_users, admin_only
 
 
+<<<<<<< HEAD
 @login_required(login_url='auth:login')
 @admin_only
+=======
+# @login_required(login_url='login')
+# @admin_only
+>>>>>>> 6d545aa912ebd253e16af723bef66e5f3ac1ab48
 def home_uquv_management(request):
     return render(request, _('home'), {})
 
@@ -50,7 +55,6 @@ def all_cafedra_view(request: WSGIRequest):
         'page_name': ''' Kafedralar ro'yxati ''',
         'data': cafedras,
     })
-
 
 
 def all_direction_view(request: WSGIRequest):
