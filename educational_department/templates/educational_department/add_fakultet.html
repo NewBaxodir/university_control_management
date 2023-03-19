@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block title %} <title> Kafedra qo'shish </title> {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"> Barcha bandlarni to'ldiring </h3>
+            </div>
+            <form method="POST" novalidate> {% csrf_token %}
+                <div class="card-body row" id="input_data_forms">
+                    <div class="form-group col-12 col-md-6">
+                        <label for="faculty_name"> Fakultet nomi </label>
+                        <input type="text" name="faculty_name" class="form-control" id="faculty_name" placeholder="Fakultet nomini kiriting">
+                    </div>
+                    <div class="form-group col-12 col-md-6">
+                        <label for="hr_s"> Fakultet uchun mas'ul shaxsni tanlang </label>
+                        <select class="custom-select rounded-0" id="hr_s" name="manager">
+                            <option selected disabled value=""> ... </option>
+                            {% for i in managers %} 
+                                <option value="{{ i.user.username }}"> {{ i.user.last_name }} {{ i.user.first_name }} ({{i.user.username}}) </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="text-danger">
+                        {{ error_msg }}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Saqlash</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
