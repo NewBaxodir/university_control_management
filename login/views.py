@@ -9,6 +9,11 @@ UQUV_MANAGEMENT = Group.objects.get(name='uquv_management')
 FACULTY_MANAGEMENT = Group.objects.get(name='faculty_management')
 KAFEDRA_MANAGEMENT = Group.objects.get(name='kafedra_management')
 
+HOME_PAGE_LIST = [
+    'educational_department:home',
+    'fakultet:faculty_dep_home',
+    'cafedra:dep_home'
+]
 
 def login(request: WSGIRequest):
     if request.method == 'POST':
