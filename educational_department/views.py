@@ -3,9 +3,13 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.contrib.auth import login, logout, authenticate
 from django.db.models import Q
 from django.core.handlers.wsgi import WSGIRequest
+from django.http import HttpResponse, Http404
+
 
 from educational_department.models import *
 from .utils import get_educational_department_manager_or_404, custom_404, custom_template_name as _
+from login.views import FACULTY_MANAGEMENT, KAFEDRA_MANAGEMENT, UQUV_MANAGEMENT
+
 
 from fakultet.models import Faculty, FacultyManager
 from cafedra.models import Cafedra, CafedraManager
@@ -23,10 +27,46 @@ from login.decorators import unauthenticated_user , allowed_users, admin_only
 def home_uquv_management(request):
     return render(request, _('home'), {})
 
+
+# Human resource qo'shish
 @login_required(login_url='auth:login')
 def add_hr_views(request: WSGIRequest):
+    error_msg = ''
+    LIST_SELECT = ['k_m', 'f_d', 'o_d']
+    if request.method == 'POST':
+        username =      request.POST.get('username', False)
+        first_name =    request.POST.get('first_name', False)
+        last_name =     request.POST.get('last_name', False)
+        email =         request.POST.get('email', False)
+        password =      request.POST.get('password_1', False)
+        password_2 =    request.POST.get('password_2', False)
+        hr_s =          request.POST.get('hr_s', False)
+        try:
+            MainUser.objects.get(username=username)
+            error_msg = 'Bunday foydalanuvchi nomi mavjud. Iltimos boshqa foydalanuvchi nomini kiriting !'
+        except:
+            if username and first_name and last_name and email \
+                and password and password_2 and hr_s in LIST_SELECT and password_2 == password:
+                user = MainUser.objects.create(
+                    username=username,
+                    password=password,
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email
+                )
+                user.is_active = True
+                user.is_staff = True
+                if hr_s == 'k_m': user.groups.add(KAFEDRA_MANAGEMENT)
+                if hr_s == 'f_d': user.groups.add(FACULTY_MANAGEMENT)
+                if hr_s == 'o_b': user.groups.add(UQUV_MANAGEMENT)
+                user.save()
+                return redirect('educational_department:home')
+            else:
+                error_msg = 'Ma\'lumotlar noto\'g\'ri kiritilgan !'
+    return render(request, _('add_hr'), {
+        'error_msg': error_msg,
+    })
 
-    return render(request, _('add_hr'), {})
 
 
 
