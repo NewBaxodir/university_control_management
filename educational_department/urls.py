@@ -3,7 +3,7 @@ from educational_department import views
 
 
 urlpatterns = [
-    path('edu_dep/', views.home_uquv_management, name='home'),
+    path('', views.home_uquv_management, name='home'),
     
 ]
 
