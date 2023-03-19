@@ -6,7 +6,7 @@ from moderator.models import MainUser
 
 class FacultyManager(models.Model):
     user = models.OneToOneField(MainUser, on_delete=models.CASCADE, verbose_name='Foydalanuvchi')
-
+    is_manager = models.BooleanField(default=False)
     def __str__(self) -> str:
         return str(self.user)
     
@@ -18,7 +18,7 @@ class FacultyManager(models.Model):
 
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=200, verbose_name='Fakultet nomi')
+    name = models.CharField(max_length=200, verbose_name='Fakultet nomi', unique=True)
     manager = models.ForeignKey(FacultyManager, on_delete=models.CASCADE, verbose_name='Fakultet manageri')
 
     def __str__(self) -> str:
