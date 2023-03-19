@@ -252,13 +252,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{% url 'educational_department:add_faculty' %}" class="nav-link">
                   <i class="fa-solid fa-building-columns nav-icon"></i>
                   <p>Fakultetlar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{% url 'educational_department:add_cafedra' %}" class="nav-link">
                   <i class="fa-solid fa-building nav-icon"></i>
                   <p>Kafedralar</p>
                 </a>
@@ -449,5 +449,12 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{% static 'admin_lte/dist/js/pages/dashboard.js' %}"></script>
 {% block js %}{% endblock js %}
+<script>
+    var id = Number('{{ id }}');
+    
+    var ul_list = document.getElementsByClassName("nav nav-pills nav-sidebar flex-column");
+    if (id !== 0)
+      ul_list[0].getElementsByTagName("li")[id].setAttribute("class", "nav-item menu-is-opening menu-open");
+</script>
 </body>
 </html>
