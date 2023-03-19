@@ -26,5 +26,4 @@ urlpatterns = [
     path('faculty_dep', include(('fakultet.urls', 'fakultet'))),
     path('dep', include(('cafedra.urls', 'cafedra'))),
 
-
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
