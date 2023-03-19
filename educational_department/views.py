@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.core.handlers.wsgi import WSGIRequest
-from django.contrib.auth import login, logout, authenticate
 from django.db.models import Q
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, Http404
@@ -16,7 +15,6 @@ from cafedra.models import Cafedra, CafedraManager
 from study_plan.models import Science, Direction
 
 
-from django.contrib.auth import login, logout,authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from login.decorators import unauthenticated_user , allowed_users, admin_only
@@ -25,7 +23,9 @@ from login.decorators import unauthenticated_user , allowed_users, admin_only
 @login_required(login_url='auth:login')
 @admin_only
 def home_uquv_management(request):
-    return render(request, _('home'), {})
+    return render(request, _('home'), {
+        'id': 0,
+    })
 
 
 # Human resource qo'shish
@@ -56,16 +56,128 @@ def add_hr_views(request: WSGIRequest):
                 )
                 user.is_active = True
                 user.is_staff = True
-                if hr_s == 'k_m': user.groups.add(KAFEDRA_MANAGEMENT)
-                if hr_s == 'f_d': user.groups.add(FACULTY_MANAGEMENT)
-                if hr_s == 'o_b': user.groups.add(UQUV_MANAGEMENT)
+                user.save()
+                if hr_s == 'k_m':
+                    user.groups.add(KAFEDRA_MANAGEMENT)
+                    CafedraManager.objects.create(user=user)
+
+                if hr_s == 'f_d':
+                    user.groups.add(FACULTY_MANAGEMENT)
+                    FacultyManager.objects.create(user=user)
+
+                if hr_s == 'o_b': 
+                    user.groups.add(UQUV_MANAGEMENT)
+                    EducationalDepartmentManager.objects.create(user=user)
+
                 user.save()
                 return redirect('educational_department:home')
             else:
                 error_msg = 'Ma\'lumotlar noto\'g\'ri kiritilgan !'
     return render(request, _('add_hr'), {
         'error_msg': error_msg,
+        'id': 1,
     })
+
+
+
+def add_cafedra_view(request: WSGIRequest):
+    managers = CafedraManager.objects.filter(is_manager = False)
+    facultys = Faculty.objects.all()
+    error_msg = ''
+    if request.method == 'POST':
+        cafedra_name = request.POST.get('cafedra_name', False)
+        faculty = request.POST.get('faculty', False)
+        manager = request.POST.get('manager', False)
+
+        try:
+            manager = CafedraManager.objects.get(user__username=manager)
+        except:
+            error_msg = 'Kafedra managerini tanlang'
+        
+        try:
+            faculty = Faculty.objects.get(id=faculty)
+        except:
+            error_msg = 'Fakultetni tanlang'
+        
+        if cafedra_name and faculty and manager and not error_msg:
+            Cafedra.objects.create(
+                name=cafedra_name,
+                manager=manager,
+                faculty=faculty,
+            )
+            manager.is_manager = True
+            manager.save()
+            return redirect('educational_department:home')
+        else:
+            error_msg = 'Barcha bandlarni to\'ldiring '
+        
+
+    return render(request, _('add_cafedra'), {
+        'id': 1,
+        'managers': managers,
+        'facultys': facultys,
+        'error_msg': error_msg,
+    })
+
+
+
+def add_faculty_view(request: WSGIRequest):
+    managers = FacultyManager.objects.filter(is_manager=False)
+    error_msg = ''
+    if request.method == 'POST':
+        manager = request.POST.get('manager', False)
+        faculty = request.POST.get('faculty_name', False)
+
+        try:
+            manager = FacultyManager.objects.get(user__username=manager)
+        except:
+            manager = False
+            error_msg = 'Mas\'ul shaxsni tanlang'
+        
+        try:
+            faculty = Faculty.objects.get(name=faculty)
+            error_msg = 'Ushbu nomdagi fakultet avvaldanoq mavjud. Iltimos boshqa nom kiriting'
+        except:
+            pass
+        
+        if manager and faculty and not error_msg:
+            Faculty.objects.create(
+                name=faculty,
+                manager=manager,
+            )
+            manager.is_manager = True
+            manager.save()
+            return redirect('educational_department:home')
+        else:
+            print(manager, faculty, error_msg)
+
+    return render(request, _('add_fakultet'), {
+        'id': 1,
+        'managers': managers,
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
