@@ -157,6 +157,20 @@ def add_faculty_view(request: WSGIRequest):
     })
 
 
+def add_edu_dep_manager(request: WSGIRequest):
+    return render(request, _('add_uquv_m'), {
+        'id': 1,
+    })
+
+
+def list_cafedra_view(request: WSGIRequest):
+    query = Cafedra.objects.all()
+    return render(request, _('list_cafedra'), {
+        'id': 3,
+        'query': query,
+    })
+
+
 
 
 
